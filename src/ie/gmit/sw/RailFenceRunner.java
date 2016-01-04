@@ -1,51 +1,40 @@
 package ie.gmit.sw;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RailFenceRunner {
 	
 	private static int key = 1;
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		// INSTANCE
 		RailFence rf = new RailFence();
-		TextScorrer ts = new TextScorrer();
+		FileParser fp = new QuadGramMap();
+		
+		// Map
+		Map<String, Double> qgm = null;
+		try {
+			qgm = fp.parse("4gram.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// VARIABLES
-		int i;
-		String encriptedText = "TTFOHATGRNREEANOETYRCIMHHAKT";
+		System.out.println("Enter the text -->   ");
+		String text = new Scanner(System.in).nextLine();
 		
-		// TEXT SCORRER
-		//**********************************************************************************
+		String encriptedText = rf.encrypt(text, 8);
 		
+		//String encriptedText = "TTFOHATGRNREEANOETYRCIMHHAKT";
 		
+		CypherBreaker cb = new CypherBreaker(encriptedText, qgm);
 		
-		//**********************************************************************************
-		// 2) Creating the number of treads that will check for keys
-		//**********************************************************************************
-		for(i = 2; i <= encriptedText.length() / 2; i++){
-			new Thread(new Runnable(){
-				int k = nextKey(encriptedText);
-				@Override
-				public void run() {
-					String text = rf.decrypt(encriptedText, k);
-					int score = ts.calculateScore(text);
-				}
-				
-			});
-		}
-		//**********************************************************************************
-		//**********************************************************************************
-	}
-	
-	public static synchronized int nextKey(String encriptedText){
-		if(key <= encriptedText.length() / 2){
-			key++;
-		}
-		return key;
-	}
-	
-	
-
-}
+		Resultable r = cb.getFinalResult();
+		
+		System.out.println("Result is > " + r.getPlainText() + "; Key is > " + r.getKey());
+		
+	} // main
+} // class
