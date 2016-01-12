@@ -41,7 +41,7 @@ public class Decrypter implements Runnable{
 		
 		queue.put(r);
 		
-		//System.out.println(plainText + "; key > " + key + "; Score > " + score);
+		System.out.println(plainText + "; key > " + key + "; Score > " + score);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

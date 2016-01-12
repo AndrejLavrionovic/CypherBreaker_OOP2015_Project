@@ -11,7 +11,7 @@ public class Runner {
 	
 	// CONSTANTS
 	private static final String GRAM_FILE = "4grams.txt";
-	private static final String PROLOGUE_FILE =  "overview.txt";
+	private static final String PROLOGUE_FILE = "overview.txt";
 	public static void main(String[] args){
 		
 		// INSTANCE
