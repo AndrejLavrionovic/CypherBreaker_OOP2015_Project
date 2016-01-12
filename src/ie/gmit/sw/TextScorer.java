@@ -1,7 +1,6 @@
 package ie.gmit.sw;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class TextScorer {
 	
@@ -11,7 +10,6 @@ public class TextScorer {
 		
 		
 		String quadGram = null;
-		Double value;
 		
 		for(int i = 0, j = 4; j <= plainText.length(); i++, j++){
 			quadGram = plainText.substring(i, j);

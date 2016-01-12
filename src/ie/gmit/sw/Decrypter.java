@@ -2,7 +2,6 @@ package ie.gmit.sw;
 
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Decrypter implements Runnable{
 	
@@ -26,6 +25,7 @@ public class Decrypter implements Runnable{
 	
 	@Override
 	public void run() {
+		try {
 		
 		// Decryption of text using key
 		RailFence rf = new RailFence();
@@ -33,19 +33,17 @@ public class Decrypter implements Runnable{
 		
 		// Getting score
 		TextScorer ts = new TextScorer();
-		Double score = 0.0;
+		double score = 0f;
 		score = ts.getScore(plainText, qgm);
 		
 		// Push result into queue
 		Resultable r = new Result(plainText, key, score);
 		
-		try {
-			queue.put(r);
+		queue.put(r);
+		
+		//System.out.println(plainText + "; key > " + key + "; Score > " + score);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(plainText + "; key > " + key + "; Score > " + score);
-		
 	}
 }

@@ -20,6 +20,7 @@ public class QuadGramMap implements FileParser {
 			
 			// READING FROM FILE
 			try{
+				@SuppressWarnings("resource")
 				BufferedReader br = new BufferedReader(new FileReader("4grams.txt"));
 				
 				while((line = br.readLine()) != null){

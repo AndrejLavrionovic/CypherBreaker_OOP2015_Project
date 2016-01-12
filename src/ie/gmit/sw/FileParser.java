@@ -1,8 +1,6 @@
 package ie.gmit.sw;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Map;
 
 public interface FileParser {
 
